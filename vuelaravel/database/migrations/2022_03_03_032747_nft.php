@@ -17,11 +17,12 @@ class Nft extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('name');
-            $table->integer('price');
-            $table->integer('current_bid')->nullable();
+            $table->double('price');
+            $table->double('current_bid')->nullable();
             $table->string('image');
             $table->text('description');
             $table->enum('status' , [ 'pending','active' , 'blocked']);
+            $table->integer('buy')->default(0);
         });
     }
 

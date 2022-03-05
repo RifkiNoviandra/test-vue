@@ -11,4 +11,8 @@ class nft extends Model
 
     protected $guarded = [];
     public $timestamps = false ;
+
+    function category(){
+        return $this->hasMany(category::class , 'nft_id');
+    }
 }

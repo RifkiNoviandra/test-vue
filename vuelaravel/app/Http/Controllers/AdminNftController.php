@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\category;
+use App\Models\list_category;
 use App\Models\nft;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -10,45 +11,21 @@ use Illuminate\Support\Str;
 
 class AdminNftController extends Controller
 {
-    function login(Request $request){
-
-        $request->validate([
-            'username' => 'required',
-            'password' => 'required'
-        ]);
-
-        $input = $request->only('username' , 'password');
-
-        $login = User::where('username' , $input['username'])->where('password' , $input['password'])->first();
-
-        if (!$login){
-            return response([
-                'message' => 'Username / Password Doesnt Match'
-            ]);
-        }
-        $token = Str::random(6);
-        $login->token = $token;
-        $login->save();
-
-        return response([
-            'token' => $token
-        ]);
-    }
 
     function getNft(Request $request){
         return response([
-            'data' => category::with('nft' , 'list_category')->get(),
+            'data' => nft::with('category.list_category')->get(),
         ]);
     }
 
-    function grtNftByName(Request $request){
+    function getNftByName(Request $request){
         $request->validate([
             'key'=> 'required'
         ]);
 
         $key = $request->key;
 
-        $data = category::with('nft' , 'list_category')->where('name' , 'LIKE' , '%'.$key.'%')->get();
+        $data = nft::with('category.list_category')->where('name' , 'LIKE' , '%'.$key.'%')->get();
 
         if (!$data){
             return response([
@@ -68,7 +45,7 @@ class AdminNftController extends Controller
 
         $filter = $request->filter;
 
-        $data = category::with('nft' , 'list_category')->where('category' , $filter);
+        $data = list_category::with( 'category.nft')->where('name' , $filter)->get();
 
         if (!$data){
             return response([
@@ -83,12 +60,12 @@ class AdminNftController extends Controller
 
     function getNftByStatus(Request $request){
         $request->validate([
-            'filter' => 'required'
+            'status' => 'required'
         ]);
 
         $status = $request->status;
 
-        $data = category::with('nft' , 'list_category')->where('status' , $status);
+        $data = nft::with('category.list_category')->where('status' , $status)->get();
 
         if (!$data){
             return response([
@@ -130,7 +107,7 @@ class AdminNftController extends Controller
 
         $nft_id = $request->nft_id;
 
-        $find = nft::where('status' , 'pending')->where('status' , 'active')->where('id' , $nft_id)->first();
+        $find = nft::whereIn('status' , ['pending' , 'active'])->where('id' , $nft_id)->first();
 
         if (!$find){
             return response([

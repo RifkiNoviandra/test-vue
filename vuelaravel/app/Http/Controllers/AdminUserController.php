@@ -20,7 +20,7 @@ class AdminUserController extends Controller
 
         $key = $request->key;
 
-        $data = User::where('role' , 'user')->where('name' , 'LIKE' , '%'.$key.'%' , 'OR' , 'email' , '%'.$key.'%')->get();
+        $data = User::where('role' , 'user')->where('username' , 'LIKE' , '%'.$key.'%' , 'OR' , 'email' , '%'.$key.'%')->get();
 
         if (!$data){
             return response([
@@ -40,7 +40,7 @@ class AdminUserController extends Controller
 
         $status = $request->status;
 
-        $data = User::where('role' , 'user')->where('status' , $status);
+        $data = User::where('role' , 'user')->where('status' , $status)->get();
 
         if (!$data){
             return response([
@@ -53,7 +53,7 @@ class AdminUserController extends Controller
         ]);
     }
 
-    function blockUser(Request $request){
+    function blockMember(Request $request){
         $request->validate([
             'user_id' => 'required'
         ]);

@@ -10,12 +10,13 @@ class transaction extends Model
     use HasFactory;
 
     protected $guarded = [];
+    public $timestamps = false;
 
     function user(){
-        return $this->belongsTo('user_id' , User::class);
+        return $this->belongsTo(User::class , 'user_id' );
     }
 
     function nft(){
-        return $this->belongsTo('nft_id' , nft::class);
+        return $this->belongsTo(  nft::class , 'nft_id');
     }
 }

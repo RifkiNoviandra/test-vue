@@ -11,4 +11,8 @@ class list_category extends Model
 
     protected $guarded = [];
     public $timestamps = false;
+
+    function category(){
+        return $this->hasMany(category::class , 'category_id');
+    }
 }

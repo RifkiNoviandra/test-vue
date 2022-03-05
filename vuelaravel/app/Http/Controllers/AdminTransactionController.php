@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminTransactionController extends Controller
 {
@@ -15,14 +16,18 @@ class AdminTransactionController extends Controller
         ]);
     }
 
-    function listTransactionByData(Request $request){
+    function listTransactionByDate(Request $request){
         $request->validate([
-            'date' => 'required'
+            'date_first' => 'required',
+            'date_end' => 'required',
         ]);
 
-        $date = $request->date;
+        $date_first = $request->date_first;
+        $date_end = $request->date_end;
 
-        $data = transaction::with('user' , 'nft')->where('bid_at' , $date)->get();
+        $data = transaction::with('user' , 'nft')->whereBetween('bid_at' , [$date_first , $date_end])->get();
+
+//        return response([$data]);
 
         if (!$data){
             return response([

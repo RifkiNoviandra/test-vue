@@ -1,0 +1,78 @@
+@import "bootstrap.min.css";
+
+.navbar{
+    position: sticky;
+    border-bottom: 2px solid grey;
+}
+
+.sidebar{
+    left: 0;
+    top: 0;
+    border-right: 1px solid grey;
+    height: 100vh;
+    width: 10vw;
+}
+
+.card-width{
+    width: 350px;
+}
+
+.nft_image{
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.filter{
+    height: 30px;
+}
+.filter img{
+    width: 30px;
+    height: 30px;
+}
+
+.blue-line{
+    width: 150px;
+    height: 20px;
+    background-color: lightblue;
+    border-radius: 20px;
+}
+
+.btn-custom{
+    width: 100px;
+    border-radius: 20px;
+}
+
+.register{
+    background-color: lightblue;
+    color: white;
+    margin-right: 3px;
+}
+
+.login{
+    background-color: white;
+    color: lightblue;
+    border: 1px solid grey;
+}
+.register-container{
+    width: 100vw;
+    height: 100vh;
+}
+
+.detail_image_nft{
+    width: 500px;
+    height: 500px;
+}
+
+.category_desc{
+    width: 100px;
+    background-color: grey;
+    color: white;
+}
+
+.button_bid{
+    width: 100px;
+    height: 30px!important;
+    background-color: lightblue;
+    color: white;
+}

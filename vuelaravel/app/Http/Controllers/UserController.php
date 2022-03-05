@@ -49,8 +49,12 @@ class UserController extends Controller
         }
 
         $token = Str::random(7);
+        $check->token = $token ;
+        $check->save();
+
         return response([
-            "message" => $token
+            "message" => $token,
+            "role" => $check->role
         ]);
     }
 

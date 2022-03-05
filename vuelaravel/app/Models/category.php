@@ -13,10 +13,10 @@ class category extends Model
     public $timestamps = false;
 
     function nft(){
-        return $this->hasMany('nft_id' , nft::class);
+        return $this->hasMany(nft::class , 'id');
     }
 
     function list_category(){
-        return $this->belongsTo('category_id' , list_category::class);
+        return $this->belongsTo(list_category::class , 'id');
     }
 }
