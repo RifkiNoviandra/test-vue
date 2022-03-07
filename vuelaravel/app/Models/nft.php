@@ -15,4 +15,8 @@ class nft extends Model
     function category(){
         return $this->hasMany(category::class , 'nft_id');
     }
+
+    function user(){
+        return $this->belongsTo(User::class , 'user_id');
+    }
 }

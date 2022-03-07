@@ -75,4 +75,27 @@ class AdminUserController extends Controller
             'message' => 'user blocked'
         ]);
     }
+
+    function UnblockMember(Request $request){
+        $request->validate([
+            'user_id' => 'required'
+        ]);
+
+        $user_id = $request->user_id;
+
+        $find = User::where('id' , $user_id)->first();
+
+        if (!$find){
+            return response([
+                'message' => 'no user with ID '.$user_id
+            ]);
+        }
+
+        $find->status = 'aktif' ;
+        $find->save();
+
+        return response([
+            'message' => 'user Unblocked'
+        ]);
+    }
 }

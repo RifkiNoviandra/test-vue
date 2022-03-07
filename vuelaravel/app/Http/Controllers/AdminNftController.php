@@ -27,6 +27,7 @@ class AdminNftController extends Controller
 
         $data = nft::with('category.list_category')->where('name' , 'LIKE' , '%'.$key.'%')->get();
 
+
         if (!$data){
             return response([
                 'message' => 'no data'

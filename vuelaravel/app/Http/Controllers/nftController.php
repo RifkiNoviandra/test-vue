@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\list_category;
 use App\Models\nft;
 use App\Models\transaction;
 use Illuminate\Http\Request;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class nftController extends Controller
 {
     function getAllNft(Request $request){
-        $data = nft::all();
+        $data = nft::with('user')->get();
 
         return response([
             "data" => $data
@@ -18,7 +19,7 @@ class nftController extends Controller
     }
 
     function getNftById(Request $request , $id){
-        $data = nft::where('id' , $id)->first();
+        $data = nft::with('category.list_category' , 'user')->where('id' , $id)->first();
 
         return response([
             "data" => $data
@@ -26,7 +27,7 @@ class nftController extends Controller
     }
 
     function getNftByBuy(Request $request){
-        $data = nft::orderByDesc('buy')->get();
+        $data = nft::with('user')->orderByDesc('buy')->get();
 
         return response([
             'data' => $data
@@ -34,10 +35,33 @@ class nftController extends Controller
     }
 
     function getNewestNft(Request $request){
-        $data = nft::orderByDesc('id')->get();
+        $data = nft::with('user')->orderByDesc('id')->get();
 
         return response([
             'data' => $data
+        ]);
+    }
+
+    function getNftByName(Request $request){
+        $request->validate([
+            'key'=> 'required'
+        ]);
+
+        $key = $request->key;
+
+        $data = nft::with('category.list_category' , 'user')->where('name' , 'LIKE' , '%'.$key.'%')->get();
+
+        $data2 = list_category::with('category.nft')->where('name' , 'LIKE' , '%'.$key.'%')->get();
+
+        if (!$data){
+            return response([
+                'message' => 'no data'
+            ]);
+        }
+
+        return response([
+            'data_name' => $data,
+            'data_category' => $data2
         ]);
     }
 
@@ -99,6 +123,11 @@ class nftController extends Controller
 
         if($search->current_bid == NULL){
             $input['user_id'] = Auth::guard('web')->id();
+            if ($search->user_id === $input['user_id']){
+                return response([
+                    'message' => 'You cant bid your own Nft'
+                ]);
+            };
             $search->current_bid = $input['bid_value'];
             $search->buy += 1;
             $search->save();
@@ -116,6 +145,11 @@ class nftController extends Controller
         }
         else if($search->current_bid < $input['bid_value']){
             $input['user_id'] = Auth::guard('web')->id();
+            if ($search->user_id === $input['user_id']){
+                return response([
+                    'message' => 'You cant bid your own Nft'
+                ]);
+            };
             $search->current_bid = $input['bid_value'];
             $search->buy += 1;
             $search->save();

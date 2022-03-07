@@ -45,12 +45,16 @@
 
 .register{
     background-color: lightblue;
+    text-decoration: none;
+    text-align: center;
     color: white;
     margin-right: 3px;
 }
 
 .login{
     background-color: white;
+    text-decoration: none;
+    text-align: center;
     color: lightblue;
     border: 1px solid grey;
 }
@@ -75,4 +79,22 @@
     height: 30px!important;
     background-color: lightblue;
     color: white;
+}
+
+.logout{
+    border-radius: 20px;
+    color: white;
+    padding: 10px 10px;
+    border: none;
+}
+
+.container_admin{
+    width: 100vw;
+}
+
+.sidebar_admin{
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 20vw;
 }

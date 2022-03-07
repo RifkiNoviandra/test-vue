@@ -21,10 +21,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/user/register', [\App\Http\Controllers\UserController::class, 'register']);
 Route::post('/user/login', [\App\Http\Controllers\UserController::class, 'login']);
 
-Route::get('nft', [\App\Http\Controllers\nftController::class, 'getAllNft']);
+Route::get('nft/', [\App\Http\Controllers\nftController::class, 'getNewestNft']);
+Route::get('nft/bidhist/{id}', [\App\Http\Controllers\UserController::class, 'bidHistory']);
+Route::get('nft/buy', [\App\Http\Controllers\nftController::class, 'getNftByBuy']);
+Route::get('nft/all', [\App\Http\Controllers\nftController::class, 'getAllNft']);
 Route::get('nft/{id}', [\App\Http\Controllers\nftController::class, 'getNftById']);
-Route::get('nft/topSale', [\App\Http\Controllers\nftController::class, 'getNftByBuy']);
-Route::get('nft/newest', [\App\Http\Controllers\nftController::class, 'getNewestNft']);
+Route::post('/search', [\App\Http\Controllers\nftController::class, 'getNftByName']);
 Route::middleware('user')->post('nft/upload', [\App\Http\Controllers\nftController::class, 'UserNftUpload']);
 Route::middleware('user')->post('nft/trade/{id}', [\App\Http\Controllers\nftController::class, 'trade']);
 
@@ -33,6 +35,7 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::post('searchMember', [\App\Http\Controllers\AdminUserController::class, 'getMemberBySearch']);
     Route::post('statusMember', [\App\Http\Controllers\AdminUserController::class, 'getMemberByStatus']);
     Route::post('blockMember', [\App\Http\Controllers\AdminUserController::class, 'blockMember']);
+    Route::post('UnblockMember', [\App\Http\Controllers\AdminUserController::class, 'UnblockMember']);
 
     Route::get('nft', [\App\Http\Controllers\AdminNftController::class, 'getNft']);
     Route::post('CategoryNft', [\App\Http\Controllers\AdminNftController::class, 'getNftByCategory']);
