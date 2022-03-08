@@ -46,6 +46,11 @@ Route::middleware('admin')->prefix('admin')->group(function () {
 
     Route::get('transaction', [\App\Http\Controllers\AdminTransactionController::class, 'listTransaction']);
     Route::post('transactionDate', [\App\Http\Controllers\AdminTransactionController::class, 'listTransactionByDate']);
+
+    Route::get('category' , [\App\Http\Controllers\categoryController::class , 'getCategory']);
+    Route::post('category/create' , [\App\Http\Controllers\categoryController::class , 'create']);
+    Route::delete('category/delete/{id}' , [\App\Http\Controllers\categoryController::class , 'delete']);
+    Route::post('category/update/{id}' , [\App\Http\Controllers\categoryController::class , 'update']);
 });
 
 

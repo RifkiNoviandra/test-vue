@@ -1,4 +1,8 @@
 @import "bootstrap.min.css";
+html{
+    scroll-behavior: smooth;
+}
+
 
 .navbar{
     position: sticky;
@@ -17,6 +21,19 @@
     width: 350px;
 }
 
+.hovering{}
+
+.hovering:hover{
+    transform: scale(1.1);
+    transition: 0.5s ease-out;
+}
+
+.hovering1:hover{
+    transition: 0.5s ease-out;
+    opacity: 0.7;
+    transform: scale(0.9);
+}
+
 .nft_image{
     width: 300px;
     height: 200px;
@@ -33,13 +50,14 @@
 
 .blue-line{
     width: 150px;
-    height: 20px;
+    height: 10px;
     background-color: lightblue;
     border-radius: 20px;
 }
 
 .btn-custom{
     width: 100px;
+    height: 50px;
     border-radius: 20px;
 }
 
@@ -51,12 +69,23 @@
     margin-right: 3px;
 }
 
+.register:hover{
+    background-color: #6ca7b4;
+    color: white;
+}
+
 .login{
     background-color: white;
     text-decoration: none;
     text-align: center;
     color: lightblue;
     border: 1px solid grey;
+}
+
+.login:hover{
+    background-color: lightblue;
+    color: white;
+    border: none;
 }
 .register-container{
     width: 100vw;
@@ -97,4 +126,95 @@
     left: 0;
     height: 100vh;
     width: 20vw;
+}
+
+.height_custom{
+    height: 40vh;
+}
+
+.img_fit{
+    height: 40vh;
+    object-fit: cover;
+}
+
+.Hero{
+    position: absolute;
+    z-index: 10;
+    top : 35vh;
+    color: white;
+}
+
+
+@media only screen and (min-width: 992px) {
+    .height_custom{
+        height: 600px;
+    }
+
+    .img_fit{
+        height: 600px;
+        object-fit: cover;
+    }
+
+    .Hero{
+        position: absolute;
+        z-index: 10;
+        top : 300px;
+        color: white;
+    }
+}
+
+.member{
+    z-index: 20;
+    background-color: white;
+}
+
+.input_search{
+    width: 60vw;
+    height: 50px;
+}
+
+.btn_custom_color{
+    background-color: green;
+    color: white;
+}
+
+.btn_custom_color:hover{
+    background-color: white;
+    color: green;
+}
+
+.footer{
+    height: 200px;
+    padding: 10px 10px;
+    margin-top: 20px;
+}
+
+.copyright{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    background-color: darkgrey;
+}
+
+.subs {
+    margin-right: 5px;
+    width: 30vw;
+    height: 40px;
+    border-radius: 20px;
+}
+.button-subs{
+
+    background-color: lightblue;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 10px;
+}
+
+.sosmed_img{
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    margin-right: 5px;
+    margin-top: 5px;
 }

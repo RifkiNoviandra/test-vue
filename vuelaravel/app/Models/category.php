@@ -17,6 +17,6 @@ class category extends Model
     }
 
     function list_category(){
-        return $this->belongsTo(list_category::class , 'id');
+        return $this->belongsTo(list_category::class , 'category_id');
     }
 }
